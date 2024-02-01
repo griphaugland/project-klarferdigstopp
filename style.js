@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 
 export const fonts = {
   regular: "OpenSansRegular",
-  bold: "OpenSansMedium",
+  bold: "OpenSansBold",
 };
 
 export const globalStyles = StyleSheet.create({

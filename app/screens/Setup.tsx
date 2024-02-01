@@ -17,7 +17,9 @@ import {
   createUserWithEmailAndPassword,
 } from "firebase/auth";
 import StandardButton, { SecondaryButton } from "../../app/components/Button";
-const Login = () => {
+import Dropdown from "../../app/components/Dropdown";
+
+const Setup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [category, setCategory] = useState("");
@@ -36,18 +38,7 @@ const Login = () => {
       <View style={styles.form}>
         <Animated.View style={[styles.form, { opacity: formOpacity }]}>
           <KeyboardAvoidingView behavior="padding">
-            <Picker
-              style={styles.input}
-              selectedValue={category}
-              onValueChange={(itemValue: string) => setCategory(itemValue)}
-            >
-              <Picker.Item label="Option 1" value="Snus" />
-              <Picker.Item label="Option 2" value="Røyk" />
-              <Picker.Item label="Option 3" value="Pengespill" />
-              <Picker.Item label="Option 4" value="Rusmidler" />
-              <Picker.Item label="Option 5" value="Alkohol" />
-              <Picker.Item label="Custom Category" value="Annet" />
-            </Picker>
+            <Dropdown />
             {category === "custom" && (
               <TextInput
                 style={styles.input}
@@ -82,7 +73,7 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Setup;
 
 const styles = StyleSheet.create({
   container: {
@@ -99,6 +90,17 @@ const styles = StyleSheet.create({
     height: 50,
     borderWidth: 0,
     borderColor: "#ccc",
+    padding: 15,
+    paddingHorizontal: 5,
+    marginBottom: 10,
+    borderRadius: 5,
+    borderBottomWidth: 1,
+  },
+  picker: {
+    marginVertical: 4,
+    height: 50,
+    borderWidth: 0,
+    borderColor: "#000000",
     padding: 15,
     paddingHorizontal: 5,
     marginBottom: 10,
@@ -140,3 +142,17 @@ const styles = StyleSheet.create({
     color: "red",
   },
 });
+{
+  /* <Picker
+              style={styles.picker}
+              selectedValue={category}
+              onValueChange={(itemValue: string) => setCategory(itemValue)}
+            >
+              <Picker.Item label="Snus" value="Snus" />
+              <Picker.Item label="Røyk" value="Røyk" />
+              <Picker.Item label="Pengespill" value="Pengespill" />
+              <Picker.Item label="Rusmidler" value="Rusmidler" />
+              <Picker.Item label="Alkohol" value="Alkohol" />
+              <Picker.Item label="Annet" value="Annet" />
+            </Picker> */
+}
