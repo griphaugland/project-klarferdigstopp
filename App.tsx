@@ -30,9 +30,27 @@ export type RootStackParamList = {
 function InsideLayout() {
   return (
     <InsideStack.Navigator screenOptions={{ header: () => <Header /> }}>
-      <InsideStack.Screen name="Homescreen" component={Homescreen} />
-      <InsideStack.Screen name="Specific" component={Specific} />
-      <InsideStack.Screen name="Setup" component={Setup} />
+      <InsideStack.Screen
+        name="Homescreen"
+        component={Homescreen}
+        options={{
+          animation: "fade", // Use "fade", "slide_from_right", "slide_from_left", etc.
+        }}
+      />
+      <InsideStack.Screen
+        name="Specific"
+        component={Specific}
+        options={{
+          animation: "fade", // Use "fade", "slide_from_right", "slide_from_left", etc.
+        }}
+      />
+      <InsideStack.Screen
+        name="Setup"
+        component={Setup}
+        options={{
+          animation: "fade", // Use "fade", "slide_from_right", "slide_from_left", etc.
+        }}
+      />
     </InsideStack.Navigator>
   );
 }
@@ -78,13 +96,19 @@ export default function App() {
             <Stack.Screen
               name="Inside"
               component={InsideLayout}
-              options={{ headerShown: false }}
+              options={{
+                headerShown: false,
+                animation: "fade", // Use "fade", "slide_from_right", "slide_from_left", etc.
+              }}
             />
           ) : (
             <Stack.Screen
               name="Login"
               component={Login}
-              options={{ headerShown: false }}
+              options={{
+                headerShown: false,
+                animation: "fade", // Use "fade", "slide_from_right", "slide_from_left", etc.
+              }}
             />
           )}
         </Stack.Navigator>

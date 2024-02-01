@@ -41,11 +41,12 @@ const Login = () => {
               selectedValue={category}
               onValueChange={(itemValue: string) => setCategory(itemValue)}
             >
-              <Picker.Item label="Option 1" value="option1" />
-              <Picker.Item label="Option 2" value="option2" />
-              <Picker.Item label="Option 3" value="option3" />
-              <Picker.Item label="Option 4" value="option4" />
-              <Picker.Item label="Custom Category" value="custom" />
+              <Picker.Item label="Option 1" value="Snus" />
+              <Picker.Item label="Option 2" value="Røyk" />
+              <Picker.Item label="Option 3" value="Pengespill" />
+              <Picker.Item label="Option 4" value="Rusmidler" />
+              <Picker.Item label="Option 5" value="Alkohol" />
+              <Picker.Item label="Custom Category" value="Annet" />
             </Picker>
             {category === "custom" && (
               <TextInput

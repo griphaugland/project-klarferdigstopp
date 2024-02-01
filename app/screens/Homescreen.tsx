@@ -94,7 +94,10 @@ const Homescreen = ({ navigation }: RouterProps) => {
       </Text>
       <View style={styles.addictionList}>
         {/* Example button to add a new addiction */}
-        <AddButton title="Add a new addiction" onPress={addNewAddiction} />
+        <AddButton
+          title="Add a new addiction"
+          onPress={() => navigation.navigate("Setup")}
+        />
         {/* List out existing addiction items here */}
       </View>
     </ScrollView>
