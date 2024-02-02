@@ -39,15 +39,9 @@ const Setup = () => {
         <Animated.View style={[styles.form, { opacity: formOpacity }]}>
           <KeyboardAvoidingView behavior="padding">
             <Dropdown />
-            {category === "custom" && (
-              <TextInput
-                style={styles.input}
-                placeholder="Custom Category"
-                value={category}
-                onChangeText={(text) => setCategory(text)}
-                autoCapitalize="none"
-              />
-            )}
+            <Text style={styles.questionText}>
+              Hvor mye penger bruker du på dette på en måned?
+            </Text>
             <TextInput
               style={styles.input}
               placeholder="Amount"
@@ -79,6 +73,14 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "#ffffff",
     flex: 1,
+    flexGrow: 1,
+    flexWrap: "wrap",
+  },
+  questionText: {
+    fontSize: 14,
+    fontWeight: "400",
+    color: "#000000",
+    // Adjust your question text styles as needed
   },
   form: {
     flex: 1,
@@ -97,6 +99,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
   picker: {
+    backgroundColor: "#0e0e0e",
     marginVertical: 4,
     height: 50,
     borderWidth: 0,
@@ -117,7 +120,7 @@ const styles = StyleSheet.create({
     marginTop: 40,
   },
   headertext: {
-    fontSize: 30,
+    fontSize: 32,
     fontWeight: "bold",
     textAlign: "left",
     marginVertical: 20,
@@ -143,16 +146,4 @@ const styles = StyleSheet.create({
   },
 });
 {
-  /* <Picker
-              style={styles.picker}
-              selectedValue={category}
-              onValueChange={(itemValue: string) => setCategory(itemValue)}
-            >
-              <Picker.Item label="Snus" value="Snus" />
-              <Picker.Item label="Røyk" value="Røyk" />
-              <Picker.Item label="Pengespill" value="Pengespill" />
-              <Picker.Item label="Rusmidler" value="Rusmidler" />
-              <Picker.Item label="Alkohol" value="Alkohol" />
-              <Picker.Item label="Annet" value="Annet" />
-            </Picker> */
 }
