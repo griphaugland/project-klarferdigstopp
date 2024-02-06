@@ -28,8 +28,12 @@ const Setup = () => {
   const [loading, setLoading] = useState(false);
   const auth = FIREBASE_AUTH;
 
+  const handleCategoryChange = (selectedCategory: string) => {
+    setCategory(selectedCategory);
+  };
+
   const handleCreateAddiction = () => {
-    // Add your logic here to create the addiction item
+    console.log("Creating addiction", category, amount);
   };
   const formOpacity = useRef(new Animated.Value(1)).current;
 
@@ -38,19 +42,25 @@ const Setup = () => {
       <View style={styles.form}>
         <Animated.View style={[styles.form, { opacity: formOpacity }]}>
           <KeyboardAvoidingView behavior="padding">
-            <Dropdown />
+            <Dropdown onValueChange={handleCategoryChange} />
             <Text style={styles.questionText}>
               Hvor mye penger bruker du på dette på en måned?
             </Text>
             <TextInput
               style={styles.input}
-              placeholder="Amount"
+              placeholder="Skriv inn beløp i kroner"
               value={amount}
-              onChangeText={(text) => setAmount(text)}
+              onChangeText={(text) => {
+                if (/^\d+$/.test(text)) {
+                  setAmount(text);
+                } else if (text === "") {
+                  setAmount("");
+                }
+              }}
               keyboardType="numeric"
             />
             <StandardButton
-              title="Create Addiction"
+              title="Lag oversikt"
               onPress={handleCreateAddiction}
             />
             <View style={styles.loadspace}>
