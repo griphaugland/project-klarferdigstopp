@@ -12,6 +12,9 @@ import {
 } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import { FIREBASE_AUTH } from "../../FirebaseConfig";
+import { FIREBASE_FIRESTORE } from "../../FirebaseConfig"; // Ensure you have this export in your FirebaseConfig
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+
 import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
@@ -26,15 +29,59 @@ const Setup = () => {
   const [amount, setAmount] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [disabled, setDisabled] = useState(false);
   const auth = FIREBASE_AUTH;
 
   const handleCategoryChange = (selectedCategory: string) => {
     setCategory(selectedCategory);
   };
 
-  const handleCreateAddiction = () => {
+  /*  const handleCreateAddiction = () => {
     console.log("Creating addiction", category, amount);
+  }; */
+  const handleCreateAddiction = async () => {
+    setLoading(true);
+    setError("");
+    if (loading) {
+      setDisabled(true);
+    }
+
+    if (!FIREBASE_AUTH.currentUser) {
+      setError("No user is signed in.");
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const userUid = FIREBASE_AUTH.currentUser.uid;
+      const addictionItem = {
+        category: category,
+        amount: amount,
+        createdAt: serverTimestamp(), // This captures the time the item was created
+      };
+
+      // Assuming you have a way to get the current user's UID
+      // Reference to the user's addictions collection in Firestore
+      const collectionRef = collection(
+        FIREBASE_FIRESTORE,
+        "users",
+        userUid,
+        "addictions"
+      );
+
+      // Add the addiction item to Firestore
+      await addDoc(collectionRef, addictionItem);
+
+      console.log("Addiction item created successfully.");
+      setLoading(false);
+    } catch (error: any) {
+      console.error("Error creating addiction item: ", error);
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
   };
+
   const formOpacity = useRef(new Animated.Value(1)).current;
 
   return (
